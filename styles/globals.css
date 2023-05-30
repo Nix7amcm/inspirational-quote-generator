@@ -1,0 +1,15 @@
+/* _____ FONTS _____ */
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Source+Code+Pro:wght@200&display=swap');
+/*
+font-family: 'Permanent Marker', cursive;
+font-family: 'Caveat', cursive;
+*/
+
+/* _____ GLOBAL STYLES _____ */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}

@@ -4,21 +4,28 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '@/styles/Home.module.css';
 
-// _____ Components
+// **** Components
 import { BackgroundImage1, BackgroundImage2, FooterCon, FooterLink, GenerateQuoteButton, GenerateQuoteButtonText, GradientBackgroundCon, QuoteGeneratorCon, QuoteGeneratorInnerCon, QuoteGeneratorSubTitle, QuoteGeneratorTitle, RedSpan } from '@/components/QuoteGenerator/QuoteGeneratorElements';
 import QuoteGeneratorModal from '@/components/QuoteGenerator';
 
-// _____ Assets
+// **** Assets
 import Sun1 from '../assets/sun.png';
 import Scroll2 from '../assets/scroll.png';
 import { API } from 'aws-amplify';
-import { quotesQueryName } from '@/src/graphql/queries';
+import { generateAQuote, quotesQueryName } from '@/src/graphql/queries';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
 
 
+// **** Interface for our appsync <> lambda JSON response
+interface GenerateAQuoteData {
+	generateAQuote: {
+		statusCode: number;
+		headers: { [ key: string ]: string; };
+		body: string;
+	};
+}
 
-
-// _____ Interface for DynamoDB object
+// **** Interface for DynamoDB object
 interface UpdateQuoteInfoData {
 	id: string;
 	queryName: string;
@@ -27,7 +34,7 @@ interface UpdateQuoteInfoData {
 	updatedAt: string;
 }
 
-// _____ Type guard for our fetch function
+// **** Type guard for our fetch function
 function isGraphQLResultForquotesQueryName ( response: any ): response is GraphQLResult<{
 	quotesQueryName: {
 		items: [ UpdateQuoteInfoData ];
@@ -35,8 +42,6 @@ function isGraphQLResultForquotesQueryName ( response: any ): response is GraphQ
 }> {
 	return response.data && response.data.quotesQueryName && response.data.quotesQueryName.items;
 }
-
-
 
 
 export default function Home () {
@@ -56,9 +61,9 @@ export default function Home () {
 				},
 			} );
 			console.log( 'response', response );
-			// setNumberOfQuotes();
+			// --- setNumberOfQuotes();
 
-			// _____ Create type guards
+			// --- Create type guards
 			if ( !isGraphQLResultForquotesQueryName( response ) ) {
 				throw new Error( 'Unexpected response from API.graphql' );
 			}
@@ -80,12 +85,11 @@ export default function Home () {
 	}, [] );
 
 
-
 	// _____ Functions for quote generator modal
 	const handleCloseGenerator = () => {
 		setOpenGenerator( false );
-		setProcessingQuote(false);
-		setQuoteReceived(null);
+		setProcessingQuote( false );
+		setQuoteReceived( null );
 	};
 
 	const handleOpenGenerator = async ( e: React.SyntheticEvent ) => {
@@ -93,20 +97,41 @@ export default function Home () {
 		setOpenGenerator( true );
 		setProcessingQuote( true );
 		try {
-			// Run Lambda Function
+			// --- Run Lambda Function
+			const runFunction = "runFunction";
+			const runFunctionStringified = JSON.stringify( runFunction );
+			const response = await API.graphql<GenerateAQuoteData>( {
+				query: generateAQuote,
+				authMode: "AWS_IAM",
+				variables: {
+					input: runFunctionStringified,
+				}
+			} );
+			const responseStringified = JSON.stringify( response );
+			const responseReStringified = JSON.stringify( responseStringified );
+			const bodyIndex = responseReStringified.indexOf( "body=" ) + 5;
+			const bodyAndBase64 = responseReStringified.substring( bodyIndex );
+			const bodyArray = bodyAndBase64.split( "," );
+			const body = bodyArray[ 0 ];
+			console.log( body );
+			setQuoteReceived( body );
 
+			// --- End state:
+			setProcessingQuote( false );
+
+			// --- Fetch if any new quotes were generated from counter
+			updateQuoteInfo();
 
 			// setProcessingQuote(false);
-			setTimeout( () => {
-				setProcessingQuote( false );
-			}, 3000 );
-			
+			// setTimeout( () => {
+			// 	setProcessingQuote( false );
+			// }, 3000 );
+
 		} catch ( error ) {
 			console.log( 'error generating quote:', error );
 			setProcessingQuote( false );
 		}
 	};
-
 
 
 	return (

@@ -6,21 +6,20 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
-/**
- * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
- */
 
-// AWS packages
+// @type {import('@types/aws-lambda').APIGatewayProxyHandler}
+
+// **** AWS packages
 const AWS = require( 'aws-sdk' );
 const docClient = new AWS.DynamoDB.DocumentClient();
 
-// Image generation packages
+// **** Image generation packages
 const sharp = require( 'sharp' );
 const fetch = require( 'node-fetch' );
 const path = require( 'path' );
 const fs = require( 'fs' );
 
-// Function: update DynamoDB table
+// **** Function: update DynamoDB table
 async function updateQuoteDDBObject () {
 	const quoteTableName = process.env.API_INSPIRATIONALQUOTES_QUOTEAPPDATATABLE_NAME;
 	const quoteObjectID = "12232-234234-234234234-234234234";
@@ -53,23 +52,23 @@ exports.handler = async ( event ) => {
 
 	const apiURL = "https://zenquotes.io/api/random";
 
-	// Function: Generate quote image
+	// _____ Function: Generate quote image
 	async function getRandomQuote ( apiURLInput ) {
-		// My quote is...
+		// --- My quote is...
 		let quoteText;
-		// Author name here...
+		// --- Author name here...
 		let quoteAuthor;
 
-		// Validate response to the api
+		// --- Validate response to the api
 		const response = await fetch( apiURLInput );
 		var quoteData = await response.json();
 		console.log( quoteData );
 
-		// quote elements
+		// --- Quote elements
 		quoteText = quoteData[ 0 ].q;
 		quoteAuthor = quoteData[ 0 ].a;
 
-		// Image construction
+		// --- Image construction
 		const width = 750;
 		const height = 483;
 		const text = quoteText;
@@ -77,7 +76,7 @@ exports.handler = async ( event ) => {
 		const lineBreak = 4;
 		let newText = "";
 
-		// Define some tspanElements w/ 4 words each
+		// --- Define some tspanElements w/ 4 words each
 		let tspanElements = "";
 		for ( let i = 0; i < words.length; i++ ) {
 			newText += words[ i ] + " ";
@@ -91,43 +90,42 @@ exports.handler = async ( event ) => {
 		}
 		console.log( tspanElements );
 
-		// Construct the SVG
+		// --- Construct the SVG
 		const svgImage = `
-          <svg width="${width}" height="${height}">
-              <style>
-                 .title { 
-                   fill: #ffffff; 
-                  font-size: 20px; 
-                     font-weight: bold;
-                }
-               .quoteAuthorStyles {
-                     font-size: 35px;
-                    font-weight: bold;
-                   padding: 50px;
-              }
-                .footerStyles {
-                  font-size: 20px;
-                     font-weight: bold;
-                    fill: lightgrey;
-                   text-anchor: middle;
-                  font-family: Verdana;
-              }
-              </style>
-              <circle cx="382" cy="76" r="44" fill="rgba(255, 255, 255, 0.155)"/>
-              <text x="382" y="76" dy="50" text-anchor="middle" font-size="90" font-family="Verdana" fill="white">"</text>
-              <g>
-                  <rect x="0" y="0" width="${width}" height="auto"></rect>
-                     <text id="lastLineOfQuote" x="375" y="120" font-family="Verdana" font-size="35" fill="white" text-anchor="middle">
-                        ${tspanElements}
-                    <tspan class="quoteAuthorStyles" x="375" dy="1.8em">- ${quoteAuthor}</tspan>
-               </text>
-                </g>
-              <text x="${width / 2}" y="${height - 10
-			}" class="footerStyles">Developed by @BrianHHough | Quotes from ZenQuotes.io</text>
-          </svg>
-        `;
+				<svg width="${width}" height="${height}">
+					<style>
+						.title { 
+							fill: #ffffff; 
+							font-size: 20px; 
+							font-weight: bold;
+						}
+						.quoteAuthorStyles {
+							font-size: 35px;
+							font-weight: bold;
+							padding: 50px;
+						}
+						.footerStyles {
+							font-size: 20px;
+							font-weight: bold;
+							fill: lightgrey;
+							text-anchor: middle;
+							font-family: Verdana;
+						}
+					</style>
+					<circle cx="382" cy="76" r="44" fill="rgba(255, 255, 255, 0.155)"/>
+					<text x="382" y="76" dy="50" text-anchor="middle" font-size="90" font-family="Verdana" fill="white">"</text>
+					<g>
+						<rect x="0" y="0" width="${width}" height="auto"></rect>
+						<text id="lastLineOfQuote" x="375" y="120" font-family="Verdana" font-size="35" fill="white" text-anchor="middle">
+						${tspanElements}
+						<tspan class="quoteAuthorStyles" x="375" dy="1.8em">- ${quoteAuthor}</tspan>
+						</text>
+					</g>
+					<text x="${width / 2}" y="${height - 10}" class="footerStyles">Developed by Nix7amcm⚡ | Quotes from ZenQuotes.io</text>
+				</svg>
+    `;
 
-		//  Add background images for the svg creation
+		// --- Add background images for the svg creation
 		const backgroundImages = [
 			"backgrounds/Ali.png",
 			"backgrounds/Atlas.png",
@@ -138,7 +136,7 @@ exports.handler = async ( event ) => {
 		const randomIndex = Math.floor( Math.random() * backgroundImages.length );
 		const selectedBackgroundImage = backgroundImages[ randomIndex ];
 
-		// Composite this image together
+		// --- Composite this image together
 		const timestamp = new Date().toLocaleString().replace( /[^\d]/g, "" );
 		const svgBuffer = Buffer.from( svgImage );
 
@@ -153,7 +151,7 @@ exports.handler = async ( event ) => {
 			] )
 			.toFile( imagePath );
 
-		// Function: Update DynamoDB object in table
+		// --- Function: Update DynamoDB object in table
 		try {
 			updateQuoteDDBObject();
 		} catch ( error ) {
@@ -162,7 +160,7 @@ exports.handler = async ( event ) => {
 
 		return {
 			statusCode: 200,
-			//  Uncomment below to enable CORS requests
+			// ::::: Uncomment below to enable CORS requests
 			headers: {
 				"Content-Type": "image/png",
 				"Access-Control-Allow-Origin": "*",

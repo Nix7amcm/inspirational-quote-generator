@@ -53,8 +53,10 @@ export const FooterCon = styled.div`
   text-shadow: 1px 1px 0px #070707;
 `;
 
-export const RedSpan = styled.span`
-  color: red;
+export const HeartSpan = styled.span`
+  color: #3131ff;
+  font-size: 20px;
+  text-shadow: 1px 1px 0px #9f6e0c;
 `;
 
 export const FooterLink = styled( Link )`
@@ -94,7 +96,7 @@ export const QuoteGeneratorTitle = styled.div`
   font-family: 'Permanent Marker', cursive;
   font-size: clamp(30px, 4.5vw, 55px);
   text-align: center;
-  color: #a9e796;
+  color: #ffd966;
   padding: 0px 10px;
   position: relative;
   text-shadow: 1px 1px 0px #313131;
@@ -106,7 +108,7 @@ export const QuoteGeneratorSubTitle = styled.div`
   font-size: clamp(24px, 3vw, 40px);
   position: relative;
   width: 100%;
-  margin-block: clamp(10px,4vw, 20px);
+  margin-block: 10px;
   text-align: center;
   padding: 0px 20px;
   text-shadow: 1px 1px 0px #505050;
@@ -141,7 +143,7 @@ export const GenerateQuoteButton = styled.div`
 `;
 
 export const GenerateQuoteButtonText = styled.div`
-  color: #e796a9;
+  color: #ffd966;
   font-family: 'Caveat', cursive;
   font-size: clamp(27px, 4vw, 40px);
   /* font-weight: bold; */

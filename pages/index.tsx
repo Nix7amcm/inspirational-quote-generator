@@ -5,7 +5,7 @@ import Image from 'next/image';
 import styles from '@/styles/Home.module.css';
 
 // **** Components
-import { BackgroundImage1, BackgroundImage2, FooterCon, FooterLink, GenerateQuoteButton, GenerateQuoteButtonText, GradientBackgroundCon, QuoteGeneratorCon, QuoteGeneratorInnerCon, QuoteGeneratorSubTitle, QuoteGeneratorTitle, RedSpan } from '@/components/QuoteGenerator/QuoteGeneratorElements';
+import { BackgroundImage1, BackgroundImage2, FooterCon, FooterLink, GenerateQuoteButton, GenerateQuoteButtonText, GradientBackgroundCon, HeartSpan, QuoteGeneratorCon, QuoteGeneratorInnerCon, QuoteGeneratorSubTitle, QuoteGeneratorTitle } from '@/components/QuoteGenerator/QuoteGeneratorElements';
 import QuoteGeneratorModal from '@/components/QuoteGenerator';
 
 // **** Assets
@@ -166,16 +166,16 @@ export default function Home () {
 						<QuoteGeneratorSubTitle style={{ marginTop: "20px" }}>
 							Looking for a splash of inspiration? 
 							<br/>
-							Generate a random quote below!
+							Generate some wisdom below!
 							<br/>
-							(Provided by <FooterLink href="https://zenquotes.io/" target="_blank" rel="noopener noreferrer"> ZenQuotesAPI </FooterLink>)
+							(Provided by <FooterLink href="https://zenquotes.io/" target="_blank" rel="noopener noreferrer"> ZenQuotes</FooterLink>)
 						</QuoteGeneratorSubTitle>
 
 						<GenerateQuoteButton
 							onClick={handleOpenGenerator}
 						>
 							<GenerateQuoteButtonText>
-								Make a Quote
+								Inspire me!
 							</GenerateQuoteButtonText>
 						</GenerateQuoteButton>
 					</QuoteGeneratorInnerCon>
@@ -197,7 +197,7 @@ export default function Home () {
 					<>
 						Quotes Generated: {numberOfQuotes}
 						<br />
-						Developed with <RedSpan> ♥ </RedSpan> by <FooterLink href="https://github.com/Nix7amcm" target="_blank" rel="noopener noreferrer"> Nix7amcm⚡ </FooterLink>
+						Developed with <HeartSpan>♥</HeartSpan> by <FooterLink href="https://github.com/Nix7amcm" target="_blank" rel="noopener noreferrer"> Nix7amcm⚡ </FooterLink>
 					</>
 				</FooterCon>
 

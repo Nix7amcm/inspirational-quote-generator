@@ -100,7 +100,7 @@ const QuoteGeneratorModal = ( {
 									Download your quote!
 								</QuoteGeneratorTitle>
 								<QuoteGeneratorSubTitle>
-									See a preview:
+									Tap/hover to see a preview:
 								</QuoteGeneratorSubTitle>
 								<ImageBlobCon>
 									<ImageBlob

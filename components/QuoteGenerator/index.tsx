@@ -29,8 +29,8 @@ const QuoteGeneratorModal = ( {
 	setQuoteReceived,
 }: QuoteGeneratorModalProps ) => {
 
-	const wiseDevQuote = '"If you can centre a div, anything is possible."';
-	const wiseDevQuoteAuthor = "- a wise senior software engineer";
+	const wiseDevQuote = 'Breathe in... and out.';
+	const wiseDevQuoteAuthor = "~";
 
 	const [ blobUrl, setBlobUrl ] = useState<string | null>( null );
 
@@ -99,7 +99,7 @@ const QuoteGeneratorModal = ( {
 								<QuoteGeneratorTitle>
 									Download your quote!
 								</QuoteGeneratorTitle>
-								<QuoteGeneratorSubTitle style={{ marginTop: "20px" }}>
+								<QuoteGeneratorSubTitle>
 									See a preview:
 								</QuoteGeneratorSubTitle>
 								<ImageBlobCon>

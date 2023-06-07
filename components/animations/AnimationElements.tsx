@@ -33,19 +33,25 @@ export const ImageBlobCon = styled.div`
       transition: 0.3s all ease-in-out;
       box-shadow: 0 0 80px 90px #00000099;
     }
-  }  
+    @media only screen and (max-width: 400px) {
+      transform: scale(2.2);
+      z-index: 99999;
+      transition: 0.3s all ease-in-out;
+      box-shadow: 0 0 80px 90px #00000099;
+    }
+  }
 `;
 
 export const DownloadQuoteCardCon = styled.div`
   border: 2px solid darkgrey;
-  width: 400px;
+  width: clamp(300px, 50vw, 400px);
   position: relative;
   border-radius: 20px;
   cursor: pointer;
-  margin-top: 20px;
   transform: scale(0.7);
-  width: calc(70vw/2); /* FIX ?????? */
+  /* width: calc(70vw/2); */
   margin: auto;
+  margin-top: clamp(15px, 4vw, 30px);
   &:hover {
     background: rgb(225 225 255 / 10%);
     box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
@@ -56,8 +62,8 @@ export const DownloadQuoteCardCon = styled.div`
 `;
 
 export const CenteredLottie = styled( Lottie )`
-  width: 250px;
-  height: 250px;
+  width: clamp(170px, 20vw, 250px);
+  height: auto;
   left: 50%;
   transform: translateX(-50%);
   position: relative;
@@ -68,7 +74,7 @@ export const CenteredLottie = styled( Lottie )`
 export const DownloadQuoteCardConText = styled.div`
   color: white;
   font-family: 'Caveat', cursive;
-  font-size: 35px;
+  font-size: clamp(27px, 4vw, 35px);
   position: relative;
   width: 100%;
   text-align: center;

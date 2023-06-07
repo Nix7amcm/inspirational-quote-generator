@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Box, CircularProgress } from "@mui/material";
 
 export const GradientBackgroundCon = styled.div`
-  background: linear-gradient(to right, #7a4da7, #96e7d4);
+  background: linear-gradient(to right, #7a4da7, #76e0c7);
   background-size: 400% 400%;
   animation: gradient 6s ease infinite;
   height: 100vh;
@@ -83,7 +83,7 @@ export const QuoteGeneratorCon = styled.div`
 `;
 
 export const QuoteGeneratorInnerCon = styled.div`
-  top: 50%;
+  top: 46%;
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
@@ -92,23 +92,24 @@ export const QuoteGeneratorInnerCon = styled.div`
 
 export const QuoteGeneratorTitle = styled.div`
   font-family: 'Permanent Marker', cursive;
-  font-size: clamp(30px, 4vw, 50px);
+  font-size: clamp(30px, 4.5vw, 55px);
   text-align: center;
-  color: #ffd966;
-  padding: 0px 20px 0px 20px;
+  color: #a9e796;
+  padding: 0px 10px;
   position: relative;
-  text-shadow: 1px 1px 0px #070707;
+  text-shadow: 1px 1px 0px #313131;
 `;
 
 export const QuoteGeneratorSubTitle = styled.div`
   color: white;
   font-family: 'Caveat', cursive;
-  font-size: clamp(22px, 3vw, 35px);
+  font-size: clamp(24px, 3vw, 40px);
   position: relative;
   width: 100%;
+  margin-block: clamp(10px,4vw, 20px);
   text-align: center;
   padding: 0px 20px;
-  text-shadow: 1px 1px 0px #070707;
+  text-shadow: 1px 1px 0px #505050;
 `;
 
 export const GenerateQuoteButton = styled.div`
@@ -117,7 +118,7 @@ export const GenerateQuoteButton = styled.div`
   border: 2px solid darkgrey;
   border-radius: 20px;
 
-  margin-top: 20px;
+  /* margin-top: 20px; */
   position: relative;
   transition: 0.2s all ease-in-out;
   cursor: pointer;
@@ -125,14 +126,14 @@ export const GenerateQuoteButton = styled.div`
   margin: auto;
   transform-origin: center;
 
-  background: rgba( 144, 19, 254, 0.1 );
-  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  background: rgba( 144, 19, 254, 0.0 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.2 );
   -webkit-backdrop-filter: blur( 10px );
   backdrop-filter: blur( 10px );
   border-radius: 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   &:hover {
-    filter: brightness(3);
+    filter: brightness(2);
     transition: 0.2s all ease-in-out;
     transform: scale(1.1);  
     transform-origin: center;
@@ -140,16 +141,17 @@ export const GenerateQuoteButton = styled.div`
 `;
 
 export const GenerateQuoteButtonText = styled.div`
-  color: #f8ef29;
+  color: #e796a9;
   font-family: 'Caveat', cursive;
-  font-size: clamp(27px, 4vw, 35px);
+  font-size: clamp(27px, 4vw, 40px);
+  /* font-weight: bold; */
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
   width: 100%;
   text-align: center;
-  text-shadow: 1px 1px 0px #070707;
+  text-shadow: 1px 1px 0px #313131;
 `;
 
 export const QuoteGeneratorModalCon = styled( Box )`
@@ -157,6 +159,8 @@ export const QuoteGeneratorModalCon = styled( Box )`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  min-height: 350px;
+  min-width: 320px;
   width: 70vw;
   height: 70vh;
   box-shadow: 24;

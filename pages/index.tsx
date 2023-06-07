@@ -163,8 +163,12 @@ export default function Home () {
 							Daily Inspiration Generator
 						</QuoteGeneratorTitle>
 
-						<QuoteGeneratorSubTitle>
-							Looking for a splash of inspiration? Generate a random inspirational quote provided by <FooterLink href="https://zenquotes.io/" target="_blank" rel="noopener noreferrer"> ZenQuotesAPI </FooterLink>
+						<QuoteGeneratorSubTitle style={{ marginTop: "20px" }}>
+							Looking for a splash of inspiration? 
+							<br/>
+							Generate a random quote below!
+							<br/>
+							(Provided by <FooterLink href="https://zenquotes.io/" target="_blank" rel="noopener noreferrer"> ZenQuotesAPI </FooterLink>)
 						</QuoteGeneratorSubTitle>
 
 						<GenerateQuoteButton

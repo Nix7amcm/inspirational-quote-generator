@@ -55,7 +55,7 @@ export const FooterCon = styled.div`
 
 export const HeartSpan = styled.span`
   color: #3131ff;
-  font-size: 20px;
+  font-size: 14px;
   text-shadow: 1px 1px 0px #9f6e0c;
 `;
 

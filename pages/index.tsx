@@ -197,7 +197,7 @@ export default function Home () {
 					<>
 						Quotes Generated: {numberOfQuotes}
 						<br />
-						Developed with <HeartSpan>♥</HeartSpan> by <FooterLink href="https://github.com/Nix7amcm" target="_blank" rel="noopener noreferrer"> Nix7amcm⚡ </FooterLink>
+						Developed with <HeartSpan>💙</HeartSpan> by <FooterLink href="https://github.com/Nix7amcm" target="_blank" rel="noopener noreferrer"> Nix7amcm⚡ </FooterLink>
 					</>
 				</FooterCon>
 
